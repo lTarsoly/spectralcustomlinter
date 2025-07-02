@@ -1,0 +1,23 @@
+extends: ["spectral:oas"]
+functionsDir: './functions'
+functions:
+  - has-header
+rules:
+  info-contact: off
+  no-$ref-siblings: off
+  oas2-api-host: off
+  oas2-api-schemes: off
+  oas2-unused-definition: off
+  openapi-tags: off
+  operation-description: off
+  operation-tags: off
+  operation-tag-defined: off
+
+  poc-response-headers:
+    message: '{{error}}'
+    given:
+    - $.paths[*].get.responses.200
+    then:
+      function: has-header
+      functionOptions:
+        value: p-o-c
